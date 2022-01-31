@@ -21,7 +21,7 @@
 	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.13" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.13" />
 	  <PackageReference Include="AutoFixture.Xunit2" Version="4.17.0" />
-	  <PackageReference Include="Bogus" Version="34.0.1"/>
+	  <PackageReference Include="Bogus" Version="34.0.1" />
   </ItemGroup>
 
   <ItemGroup>
