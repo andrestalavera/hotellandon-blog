@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using HotelLandonBlog.Entities;
 using HotelLandonBlog.Data;
 using HotelLandonBlog.Repository;
+using HotelLandonBlog.UI.Controllers;
 
 namespace HotelLandonBlog.UI
 {
@@ -35,8 +36,7 @@ namespace HotelLandonBlog.UI
             // Ajouter le service pour avoir des pages (sans co
             services.AddRazorPages();
 
-            services.AddDbContext<IHotelLandonBlogContext>(options => options.UseSqlServer(conn));
-
+            services.AddDbContext<HotelLandonBlogDbContext>(options => options.UseSqlServer(conn));
             services.AddTransient<IRepository<Category>, RepositoryBase<Category>>();
             services.AddTransient<IRepository<BlogPost>, RepositoryBase<BlogPost>>();
         }

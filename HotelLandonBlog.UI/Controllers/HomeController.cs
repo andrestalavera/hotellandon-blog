@@ -14,6 +14,8 @@ namespace HotelLandonBlog.UI.Controllers
             _logger = logger;
         }
 
+        [HttpGet, Route("/")]
+        [HttpGet, Route("/home/")]
         public IActionResult Index()
         {
             return View();

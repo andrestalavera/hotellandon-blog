@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelLandonBlog.Tests", "Ho
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelLandonBlog.UI", "HotelLandonBlog.UI\HotelLandonBlog.UI.csproj", "{8FD28EC9-8848-43EB-A9B8-621E2D1C5585}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelLandonBlog.Repository", "HotelLandonBlog.Repository\HotelLandonBlog.Repository.csproj", "{F516CF4B-9D6A-4D82-978E-BDCC956E2676}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelLandonBlog.Repository", "HotelLandonBlog.Repository\HotelLandonBlog.Repository.csproj", "{F516CF4B-9D6A-4D82-978E-BDCC956E2676}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

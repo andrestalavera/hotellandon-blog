@@ -4,22 +4,20 @@ using System;
 
 namespace HotelLandonBlog.Data
 {
-    public class IHotelLandonBlogContext : DbContext
+    public interface IHotelLandonBlogContext
     {
+        DbSet<BlogPost> Posts { get; set; }
+        DbSet<Category> Categories { get; set; }
+    }
+
+    public class HotelLandonBlogDbContext : DbContext, IHotelLandonBlogContext
+    {
+        public HotelLandonBlogDbContext(DbContextOptions<HotelLandonBlogDbContext> options) : base(options)
+        {
+        }
+
         public DbSet<BlogPost> Posts { get; set; }
         public DbSet<Category> Categories { get; set; }
-
-
-        public IHotelLandonBlogContext(DbContextOptions<IHotelLandonBlogContext> options)
-                : base(options)
-        {
-        }
-
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
-        }
-
     }
 
 }

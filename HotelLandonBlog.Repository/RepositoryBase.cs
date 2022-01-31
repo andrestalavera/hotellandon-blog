@@ -14,26 +14,25 @@ namespace HotelLandonBlog.Repository
     public class RepositoryBase<TEntity> : IRepository<TEntity>
         where TEntity : EntityBase
     {
-        private readonly IHotelLandonBlogContext _dbContext;
+        private readonly HotelLandonBlogDbContext _dbContext;
 
-        public RepositoryBase(IHotelLandonBlogContext context) => this._dbContext = context;
+        public RepositoryBase(HotelLandonBlogDbContext context) => this._dbContext = context;
 
-        public async Task<TEntity> Get(int id) => await _dbContext.Set<TEntity>().FindAsync(id);
+        
 
-        public async Task<TEntity> Create(TEntity entity)
+        public async Task<TEntity> GetAsync(int id) => await _dbContext.Set<TEntity>().FindAsync(id);
+
+        public async Task<TEntity> CreateAsync(TEntity entity)
         {
 
-           _dbContext.Set<TEntity>().Add(entity);
+           await _dbContext.Set<TEntity>().AddAsync(entity);
            await _dbContext.SaveChangesAsync();
-
-           bool v = entity.IsDeleted == false;
-           entity.Creation = new DateTime();
 
            return entity;
 
         }
 
-        public async Task<TEntity> Update(int id, TEntity entity)
+        public async Task<TEntity> UpdateAsync(int id, TEntity entity)
         {
             var local = _dbContext.Set<TEntity>()
            .Local
@@ -54,44 +53,44 @@ namespace HotelLandonBlog.Repository
             return entity;
         }
 
-        public async Task<TEntity> Delete(int id)
+        public async Task<TEntity> DeleteAsync(int id)
         {
-            var entity = await Get(id);
+            var entity = await GetAsync(id);
 
 
                if (entity is not null)
             {
-                _dbContext.Remove(entity);
+               _dbContext.Remove(entity);
                 
                 await _dbContext.SaveChangesAsync();
-
-                return entity;
-
-                bool v = entity.IsDeleted == true;
-                
+         
             }
 
             return entity;
 
         }
 
-        public Task<List<TEntity>> SearchAsync(Expression<Func<TEntity, bool>> predicat = null)
+        public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicat = null)
         {
-            // On prépare la requête
-            IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
-            if (predicat != null)
-            {
-                query = query.Where(predicat);
-            }
-            // On exécute la requête
-            return query.ToListAsync();
+       
+            return await _dbContext.Set<TEntity>().ToListAsync();
         }
 
-   
 
-        public Task<TEntity> Undelete(int id)
+        public async Task<TEntity> UndeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var entity = await GetAsync(id);
+
+
+            if (entity is not null)
+            {
+                bool v = entity.IsDeleted == true;
+
+                await _dbContext.SaveChangesAsync();
+
+            }
+
+            return entity;
         }
 
 
