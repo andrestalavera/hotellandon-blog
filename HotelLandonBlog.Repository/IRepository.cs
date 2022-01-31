@@ -9,7 +9,7 @@ namespace HotelLandonBlog.Repository
     public interface IRepository<TEntity>
         where TEntity : EntityBase
     {
-        Task<IEnumerable<TEntity>> Get(Expression<Func<TEntity, bool>>? predicat = null);
+        Task<List<TEntity>> SearchAsync(Expression<Func<TEntity, bool>>? predicat = null);
         Task<TEntity> Get(int id);
         Task<TEntity> Create(TEntity entity);
         Task<TEntity> Update(int id, TEntity entity);
