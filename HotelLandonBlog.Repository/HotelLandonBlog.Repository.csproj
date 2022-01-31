@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HotelLandonBlog.Entities\HotelLandonBlog.Entities.csproj" />
+	  <ProjectReference Include="..\HotelLandonBlog.Data\HotelLandonBlog.Data.csproj" />
   </ItemGroup>
 
 </Project>
