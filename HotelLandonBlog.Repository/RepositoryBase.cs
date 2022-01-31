@@ -16,8 +16,6 @@ namespace HotelLandon.Repository
     {
         private readonly IHotelLandonBlogContext _dbContext;
 
-        
-
         public RepositoryBase(IHotelLandonBlogContext context) => this._dbContext = context;
         public async Task<TEntity> Get(int id) => await _dbContext.Set<TEntity>().FindAsync(id);
 
@@ -26,6 +24,10 @@ namespace HotelLandon.Repository
 
            _dbContext.Set<TEntity>().Add(entity);
            await _dbContext.SaveChangesAsync();
+
+           bool v = entity.IsDeleted == false;
+           entity.Creation = new DateTime();
+
            return entity;
 
         }
@@ -64,7 +66,10 @@ namespace HotelLandon.Repository
 
                 return entity;
 
+                bool v = entity.IsDeleted == true;
+                
             }
+
             return entity;
 
         }
