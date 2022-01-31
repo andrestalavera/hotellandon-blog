@@ -19,13 +19,6 @@ namespace HotelLandonBlog.UI.Controllers
         // Get
         // Get All (search)
 
-        Category category1 = new Category()
-        {
-            Name = "Lassina"
-    
-        };
-
-        RepositoryBase<Category> repository = new ();
 
 
     }

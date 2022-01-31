@@ -2,11 +2,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HotelLandonBlog.Entities\HotelLandonBlog.Entities.csproj" />
-    <ProjectReference Include="..\HotelLandonBlog.Models\HotelLandonBlog.Entities.csproj" />
   </ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.Data.Sqlite.Core" Version="5.0.13" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.13" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.13" />
 	</ItemGroup>
 
   <PropertyGroup>
