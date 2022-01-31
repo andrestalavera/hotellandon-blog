@@ -12,6 +12,7 @@ namespace HotelLandonBlog.Tests.IntegrationTests
             indexActionResultName = "index",
             detailActionResultName = "details",
             createActionResultName = "create",
+            editActionResultName = "edit",
             searchParameterName = "search",
             fakeSearchValue = "lorem",
             id = "id",
@@ -39,5 +40,8 @@ namespace HotelLandonBlog.Tests.IntegrationTests
 
         [Fact]
         public Task Categories_GetCreate_ControllerActionIdRoute_ReturnsNotFound() => ExecuteTest<string>(url: BuildUrl(categoryControllerName, detailActionResultName, new() { [id] = fakeIdValueNotFound }), expected: HttpStatusCode.NotFound);
+
+        [Fact]
+        public Task Categories_GetEdit_ControllerActionIdRoute_ReturnsOk() => ExecuteTest<string>(url: BuildUrl(categoryControllerName, editActionResultName, new() { [id] = fakeIdValue }));
     }
 }
