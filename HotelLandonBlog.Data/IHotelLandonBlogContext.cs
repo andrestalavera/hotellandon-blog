@@ -8,12 +8,13 @@ namespace HotelLandonBlog.Data
     {
         public DbSet<BlogPost> Posts { get; set; }
         public DbSet<Category> Categories { get; set; }
+
+
+        public IHotelLandonBlogContext(DbContextOptions<IHotelLandonBlogContext> options)
+                : base(options)
+        {
+        }
+
     }
-    //public IHotelLandonBlogContext(DbContextOptions<IHotelLandonBlogContext> options)
-    //        : base(options)
-    //{
-    //}
-
-
 
 }

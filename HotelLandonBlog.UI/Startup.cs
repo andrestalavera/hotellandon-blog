@@ -1,13 +1,17 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using HotelLandonBlog.Entities;
+using HotelLandonBlog.Data;
+using HotelLandonBlog.Repository;
 
 namespace HotelLandonBlog.UI
 {
@@ -23,7 +27,16 @@ namespace HotelLandonBlog.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Ajouter le service pour avoir des contr�leurs et des vues associ�es aux contr�leurs
             services.AddControllersWithViews();
+
+            // Ajouter le service pour avoir des pages (sans co
+            services.AddRazorPages();
+
+            services.AddDbContext<IHotelLandonBlogContext>(o => o.UseSqlServer(""));
+
+            services.AddTransient<IRepository<Category>, RepositoryBase<Category>>();
+            services.AddTransient<IRepository<BlogPost>, RepositoryBase<BlogPost>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,7 +9,7 @@ using HotelLandonBlog.Repository;
 using HotelLandonBlog.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace HotelLandon.Repository
+namespace HotelLandonBlog.Repository
 {
     public class RepositoryBase<TEntity> : IRepository<TEntity>
         where TEntity : EntityBase
@@ -17,6 +17,7 @@ namespace HotelLandon.Repository
         private readonly IHotelLandonBlogContext _dbContext;
 
         public RepositoryBase(IHotelLandonBlogContext context) => this._dbContext = context;
+
         public async Task<TEntity> Get(int id) => await _dbContext.Set<TEntity>().FindAsync(id);
 
         public async Task<TEntity> Create(TEntity entity)
