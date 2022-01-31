@@ -3,9 +3,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HotelLandonBlog.Data
 {
-    public interface IHotelLandonBlogContext
+    public class HotelLandonBlogContext : DbContext
     {
-        DbSet<BlogPost> Posts { get; set; }
-        DbSet<Category> Categories { get; set; }
+        public DbSet<BlogPost> Posts { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
+        public HotelLandonBlogContext(DbContextOptions<HotelLandonBlogContext>options)
+        :base (options)
+        {
+        }
     }
 }
