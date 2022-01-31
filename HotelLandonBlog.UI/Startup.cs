@@ -27,13 +27,15 @@ namespace HotelLandonBlog.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var conn = Configuration.GetConnectionString("DefaultConnection");
+
             // Ajouter le service pour avoir des contr�leurs et des vues associ�es aux contr�leurs
             services.AddControllersWithViews();
 
             // Ajouter le service pour avoir des pages (sans co
             services.AddRazorPages();
 
-            services.AddDbContext<IHotelLandonBlogContext>(o => o.UseSqlServer(""));
+            services.AddDbContext<IHotelLandonBlogContext>(options => options.UseSqlServer(conn));
 
             services.AddTransient<IRepository<Category>, RepositoryBase<Category>>();
             services.AddTransient<IRepository<BlogPost>, RepositoryBase<BlogPost>>();
