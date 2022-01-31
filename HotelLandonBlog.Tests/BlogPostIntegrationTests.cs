@@ -170,7 +170,7 @@ namespace HotelLandonBlog.Tests
         public async Task BlogPost_Edit_GET_OK(string newTitle)
         {
             // Arrange
-            BlogPost blogPost = (await Repository.GetAll()).First();
+            BlogPost blogPost = (await Repository.GetAllAsync()).First();
             blogPost.Title = newTitle;
 
             // Act
