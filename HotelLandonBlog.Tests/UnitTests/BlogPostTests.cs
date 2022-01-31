@@ -18,7 +18,7 @@ namespace HotelLandonBlog.Tests.UnitTests
 
         #region edit
         [Fact]
-        public async Task BlogPost_ContentMsutHaveTagsAsync()
+        public async Task BlogPost_ContentMustHaveTagsAsync()
         {
             // Arrange
             BlogPost blogPost = blogPostFaker.Generate();
@@ -28,6 +28,19 @@ namespace HotelLandonBlog.Tests.UnitTests
 
             // Assert
             Assert.True(match.Success);
+        }
+
+        [Fact]
+        public async Task BlogPost_TitleMustHaveMin5Characters()
+        {
+            //
+            BlogPost blogPost = blogPostFaker.Generate();
+
+            // Act
+            var has5characters = blogPost.Title.Trim().Length >= 5;
+
+            // Assert
+            Assert.True(has5characters);
         }
         #endregion
     }
