@@ -7,6 +7,7 @@
   <ItemGroup>
 	  <ProjectReference Include="..\HotelLandonBlog.Data\HotelLandonBlog.Data.csproj" />
 	  <ProjectReference Include="..\HotelLandonBlog.Entities\HotelLandonBlog.Entities.csproj" />
+	  <ProjectReference Include="..\HotelLandonBlog.Repository\HotelLandonBlog.Repository.csproj" />
   </ItemGroup>
 
 </Project>
