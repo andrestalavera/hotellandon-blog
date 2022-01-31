@@ -1,4 +1,5 @@
-﻿using HotelLandonBlog.Entities;
+﻿using HotelLandonBlog.Data;
+using HotelLandonBlog.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -13,14 +14,22 @@ namespace HotelLandonBlog.Repository
 
         public Repository(HotelLandonBlogContext context) => this.context = context;
 
-        public Task<TEntity> Create(TEntity entity)
+        public async Task<bool> Create(TEntity entity)
         {
-            throw new NotImplementedException();
+            context.Set<TEntity>().Add(entity);
+            return await context.SaveChangesAsync() == 1;
         }
 
-        public Task<TEntity> Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            TEntity entity = await GetAsync(id);
+
+            if (entity is not null)
+            {
+                context.Remove(entity);
+                return await context.SaveChangesAsync() == 1;
+            }
+            return false;
         }
 
         public Task<IEnumerable<TEntity>> Get(Expression<Func<TEntity, bool>> predicat = null)

@@ -3,14 +3,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HotelLandonBlog.Data
 {
-    public class HotelLandonBlogContext : DbContext
+
+    public interface IHotelLandonBlogContext
     {
         public DbSet<BlogPost> Posts { get; set; }
         public DbSet<Category> Categories { get; set; }
 
-        public HotelLandonBlogContext(DbContextOptions<HotelLandonBlogContext>options)
-        :base (options)
-        {
-        }
+    }
+
+
+    public class HotelLandonBlogContext : DbContext,IHotelLandonBlogContext
+    {
+
+        //public HotelLandonBlogContext(DbContextOptions<HotelLandonBlogContext>options)
+        //:base (options)
+        //{
+        //}
+        protected override OnConfiguring(DbContextOptionsBuilder optionsBuilder);
+
+        public DbSet<BlogPost> Posts { get; set ; }
+        public DbSet<Category> Categories { get ; set ; }
     }
 }

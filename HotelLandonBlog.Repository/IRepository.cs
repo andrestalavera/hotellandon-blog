@@ -10,10 +10,10 @@ namespace HotelLandonBlog.Repository
         where TEntity : EntityBase
     {
         Task<IEnumerable<TEntity>> Get(Expression<Func<TEntity, bool>>? predicat = null);
-        Task<TEntity> Get(int id);
-        Task<TEntity> Create(TEntity entity);
+        Task<TEntity> GetAsync(int id);
+        Task<bool> Create(TEntity entity);
         Task<TEntity> Update(int id, TEntity entity);
-        Task<TEntity> Delete(int id);
+        Task<bool> Delete(int id);
         Task<TEntity> Undelete(int id);
     }
 }
