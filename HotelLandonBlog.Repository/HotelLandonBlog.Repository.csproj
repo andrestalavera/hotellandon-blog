@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HotelLandonBlog.Data\HotelLandonBlog.Data.csproj" />
     <ProjectReference Include="..\HotelLandonBlog.Entities\HotelLandonBlog.Entities.csproj" />
   </ItemGroup>
 
