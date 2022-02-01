@@ -16,6 +16,7 @@ namespace HotelLandonBlog.UI.Controllers
 
         [HttpGet, Route("/")]
         [HttpGet, Route("/home/")]
+        [HttpGet, Route("/home/index")]
         public IActionResult Index()
         {
             return View();

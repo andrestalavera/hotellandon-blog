@@ -63,6 +63,11 @@ namespace HotelLandonBlog.UI
 
             app.UseEndpoints(endpoints =>
             {
+                //ajouter des route personnalisé
+                endpoints.MapControllerRoute(
+                name: "home",
+                pattern: "{controller=home}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
