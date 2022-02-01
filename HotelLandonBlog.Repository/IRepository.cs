@@ -9,11 +9,11 @@ namespace HotelLandonBlog.Repository
     public interface IRepository<TEntity>
         where TEntity : EntityBase
     {
-        Task<IEnumerable<TEntity>> Get(Expression<Func<TEntity, bool>>? predicat = null);
-        Task<TEntity> Get(int id);
-        Task<TEntity> Create(TEntity entity);
-        Task<TEntity> Update(int id, TEntity entity);
-        Task<TEntity> Delete(int id);
-        Task<TEntity> Undelete(int id);
+        Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicat = null);
+        Task<TEntity> GetAsync(int id);
+        Task<TEntity> CreateAsync(TEntity entity);
+        Task<TEntity> UpdateAsync(int id, TEntity entity);
+        Task<TEntity> DeleteAsync(int id);
+        Task<TEntity> UndeleteAsync(int id);
     }
 }
