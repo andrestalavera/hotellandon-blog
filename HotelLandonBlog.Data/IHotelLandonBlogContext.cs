@@ -19,5 +19,4 @@ namespace HotelLandonBlog.Data
         public DbSet<BlogPost> Posts { get; set; }
         public DbSet<Category> Categories { get; set; }
     }
-
 }

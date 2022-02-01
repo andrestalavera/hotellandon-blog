@@ -4,15 +4,15 @@ using System.Threading.Tasks;
 
 namespace HotelLandonBlog.UI.Controllers
 {
-    public interface IRazorController<T>
+    public interface IRazorController<TEntity>
     {
-        Task<ActionResult<IEnumerable<T>>> Index(string? search);
-        Task<ActionResult<T>> Details(int id);
-        Task<ActionResult<T>> Create(int id);
-        Task<ActionResult<T>> Create(int id, T t);
-        Task<ActionResult<T>> Edit(int id);
-        Task<ActionResult<T>> Edit(int id, T t);
-        Task<ActionResult<T>> Delete(int id);
-        Task<ActionResult<T>> Delete();
+        Task<ActionResult<IEnumerable<TEntity>>> Index(string? search);
+        Task<ActionResult<TEntity>> Details(int id);
+        Task<ActionResult<TEntity>> Create();
+        Task<ActionResult<TEntity>> Create(int id, TEntity t);
+        Task<ActionResult<TEntity>> Edit(int id);
+        Task<ActionResult<TEntity>> Edit(int id, TEntity t);
+        Task<ActionResult<TEntity>> Delete(int id);
+        Task<ActionResult<TEntity>> Undelete(int id);
     }
 }
