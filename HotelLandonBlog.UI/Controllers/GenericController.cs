@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using HotelLandonBlog.Entities;
+using HotelLandonBlog.Repository;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using HotelLandonBlog.Entities;
-using HotelLandonBlog.Repository;
-using HotelLandonBlog.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace HotelLandonBlog.UI.Controllers
 {
@@ -17,40 +16,52 @@ namespace HotelLandonBlog.UI.Controllers
 
     {
         protected readonly IRepository<TEntity> repository;
-      
+
 
         protected readonly ILogger<GenericController<TRepository, TEntity, IRazorController>> logger;
-        
+
 
         public GenericController(IRepository<TEntity> repository,
             ILogger<GenericController<TRepository, TEntity, IRazorController>> logger)
         {
             this.repository = repository;
             this.logger = logger;
-            
+
         }
 
         public async Task<ActionResult<IEnumerable<TEntity>>> Index(string search)
         {
             Stopwatch sw = new();
             sw.Start();
-            IEnumerable<TEntity> items = await this.repository.GetAllAsync();
+            IEnumerable<TEntity> items = await repository.GetAllAsync();
             logger.LogInformation("{ms}ms", sw.ElapsedMilliseconds);
             return View(items);
         }
 
-        public async Task<ActionResult<TEntity>> Create(int id) => View(default(TEntity));
-
+        public async Task<ActionResult<TEntity>> Create(int id)
+        {
+            return View(default(TEntity));
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult<TEntity>> Create(int id , TEntity t)
+        public async Task<ActionResult<TEntity>> Create(int id, TEntity t)
         {
 
-            if (id != t.Id) return View("NotFound");
+            if (id != t.Id)
+            {
+                return View("NotFound");
+            }
 
-            if (ModelState.IsValid) return await this.repository.CreateAsync(t);
-            if (!ModelState.IsValid) return View(t);
+            if (ModelState.IsValid)
+            {
+                return await repository.CreateAsync(t);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(t);
+            }
 
             return RedirectToAction(nameof(Index));
         }
@@ -61,7 +72,7 @@ namespace HotelLandonBlog.UI.Controllers
             {
                 return View("NotFound");
             }
-            TEntity entity = await this.repository.GetAsync(id);
+            TEntity entity = await repository.GetAsync(id);
             if (entity is null)
             {
                 return View("NotFound");
@@ -77,7 +88,7 @@ namespace HotelLandonBlog.UI.Controllers
         [HttpGet("[action]/{id}")]
         public async Task<ActionResult<TEntity>> Details(int id)
         {
-            TEntity entity = await this.repository.GetAsync(id);
+            TEntity entity = await repository.GetAsync(id);
             if (entity == null)
             {
                 return View("NotFound");
@@ -91,7 +102,7 @@ namespace HotelLandonBlog.UI.Controllers
             {
                 return View("NotFound");
             }
-            var entity = await this.repository.GetAsync(id);
+            TEntity entity = await repository.GetAsync(id);
             if (entity == null)
             {
                 return View("NotFound");
@@ -101,21 +112,28 @@ namespace HotelLandonBlog.UI.Controllers
 
         public async Task<ActionResult<TEntity>> Edit(int id, TEntity t)
         {
-            if (id != t.Id) return View("NotFound");
-            
+            if (id != t.Id)
+            {
+                return View("NotFound");
+            }
 
-            if (!ModelState.IsValid) return View(t);
+            if (!ModelState.IsValid)
+            {
+                return View(t);
+            }
 
             try
             {
-                await this.repository.UpdateAsync(id, t);
+                await repository.UpdateAsync(id, t);
             }
             catch (DbUpdateConcurrencyException)
             {
-                var tExists = await this.repository.GetAsync(id);
+                TEntity tExists = await repository.GetAsync(id);
 
                 if (tExists == null)
+                {
                     return NotFound();
+                }
 
                 throw;
             }

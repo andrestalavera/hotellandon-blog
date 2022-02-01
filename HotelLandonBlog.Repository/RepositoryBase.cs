@@ -25,6 +25,7 @@ namespace HotelLandonBlog.Repository
         public async Task<TEntity> CreateAsync(TEntity entity)
         {
 
+           entity.Creation = new DateTime();
            await _dbContext.Set<TEntity>().AddAsync(entity);
            await _dbContext.SaveChangesAsync();
 
@@ -57,11 +58,10 @@ namespace HotelLandonBlog.Repository
         {
             var entity = await GetAsync(id);
 
-
                if (entity is not null)
             {
-               _dbContext.Remove(entity);
-                
+                bool v = entity.IsDisable == true;
+
                 await _dbContext.SaveChangesAsync();
          
             }
@@ -84,7 +84,7 @@ namespace HotelLandonBlog.Repository
 
             if (entity is not null)
             {
-                bool v = entity.IsDeleted == true;
+                bool v = entity.IsDisable == false;
 
                 await _dbContext.SaveChangesAsync();
 
