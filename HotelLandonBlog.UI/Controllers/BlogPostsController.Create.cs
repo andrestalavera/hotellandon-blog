@@ -10,13 +10,13 @@ namespace HotelLandonBlog.UI.Controllers
     {
         // Get
         [HttpGet]
-        public Task<ActionResult<BlogPost>> Create()
+        public override Task<ActionResult<BlogPost>> Create()
         {
             return View(default(BlogPost));
         }
         // Post
         [HttpPost("[action]/{id}")]
-        public Task<ActionResult<BlogPost>> Create([Bind(new[] {
+        public override Task<ActionResult<BlogPost>> Create([Bind(new[] {
             nameof(BlogPost.Id),
             nameof(BlogPost.CategoryId),
             nameof(BlogPost.Category),

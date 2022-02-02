@@ -10,13 +10,13 @@ namespace HotelLandonBlog.UI.Controllers
     {
         // Get
         [HttpGet]
-        public Task<ActionResult<Category>> Create()
+        public override Task<ActionResult<Category>> Create()
         {
             return View(default(Category));
         }
         // Post
         [HttpPost("[action]/{id}")]
-        public Task<ActionResult<Category>> Create([Bind(new[] {
+        public override Task<ActionResult<Category>> Create([Bind(new[] {
             nameof(Category.Name),
             })] Category entity, int id) => base.Create(entity, id);
     }
