@@ -135,7 +135,7 @@ namespace HotelLandonBlog.Tests.IntegrationTests
         [Fact]
         public async Task BlogPost_GetEdit_IdStringString_ReturnsBadRequest()
         {
-            BlogPost blogPost = await Repository.Get(1);
+            BlogPost blogPost = await Repository.GetAsync(1);
             blogPost.Title = "";
 
             await ExecuteTest(url: BuildUrl(controllerName, editActionResultName, new()
@@ -154,7 +154,7 @@ namespace HotelLandonBlog.Tests.IntegrationTests
         [Theory, AutoData]
         public async Task BlogPost_PostEdit_ReplaceTitle_ReturnsOk(string newTitle)
         {
-            BlogPost blogPost = await Repository.Get(1);
+            BlogPost blogPost = await Repository.GetAsync(1);
             blogPost.Title = newTitle;
 
             await ExecuteTest(url: BuildUrl(controllerName, editActionResultName, new() { [id] = fakeWellId }), method: HttpMethod.POST, content: blogPost);
@@ -163,7 +163,7 @@ namespace HotelLandonBlog.Tests.IntegrationTests
         [Fact]
         public async Task BlogPost_PostEdit_EmptyCreationDate_ReturnsBadRequest()
         {
-            BlogPost blogPost = await Repository.Get(1);
+            BlogPost blogPost = await Repository.GetAsync(1);
             blogPost.Creation = new();
 
             await ExecuteTest(url: BuildUrl(controllerName, editActionResultName, new() { [id] = fakeWellId }), expected: HttpStatusCode.BadRequest, method: HttpMethod.POST, content: blogPost);
@@ -172,7 +172,7 @@ namespace HotelLandonBlog.Tests.IntegrationTests
         [Fact]
         public async Task BlogPost_PostEdit_EmptyTitle_ReturnsBadRequest()
         {
-            BlogPost blogPost = await Repository.Get(1);
+            BlogPost blogPost = await Repository.GetAsync(1);
             blogPost.Title = string.Empty;
 
             await ExecuteTest(url: BuildUrl(controllerName, editActionResultName, new() { [id] = fakeWellId }), expected: HttpStatusCode.BadRequest, method: HttpMethod.POST, content: blogPost);
@@ -181,7 +181,7 @@ namespace HotelLandonBlog.Tests.IntegrationTests
         [Fact]
         public async Task BlogPost_PostEdit_EmptyContent_ReturnsBadRequest()
         {
-            BlogPost blogPost = await Repository.Get(1);
+            BlogPost blogPost = await Repository.GetAsync(1);
             blogPost.Content = string.Empty;
 
             await ExecuteTest(url: BuildUrl(controllerName, editActionResultName, new() { [id] = fakeWellId }), expected: HttpStatusCode.BadRequest, method: HttpMethod.POST, content: blogPost);

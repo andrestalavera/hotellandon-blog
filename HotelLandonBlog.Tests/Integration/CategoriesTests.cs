@@ -13,6 +13,7 @@ namespace HotelLandonBlog.Tests.IntegrationTests
             detailActionResultName = "details",
             createActionResultName = "create",
             editActionResultName = "edit",
+            deleteActionResultName = "delete",
             searchParameterName = "search",
             fakeSearchValue = "lorem",
             id = "id",
@@ -22,6 +23,9 @@ namespace HotelLandonBlog.Tests.IntegrationTests
         public CategoriesTests(WebApplicationFactory<Startup> factory) : base(factory)
         {
         }
+
+        [Fact]
+        public Task Categories_GetIndex_ActionRoute_ReturnsOk() => ExecuteTest<string>(url: BuildUrl(action: indexActionResultName));
 
         [Fact]
         public Task Categories_GetIndex_ControllerActionRoute_ReturnsOk() => ExecuteTest<string>(url: BuildUrl(categoryControllerName, indexActionResultName));
@@ -39,9 +43,21 @@ namespace HotelLandonBlog.Tests.IntegrationTests
         public Task Categories_GetCreate_ControllerActionIdRoute_ReturnsOk() => ExecuteTest<string>(url: BuildUrl(categoryControllerName, createActionResultName, new() { [id] = fakeIdValue }));
 
         [Fact]
-        public Task Categories_GetCreate_ControllerActionIdRoute_ReturnsNotFound() => ExecuteTest<string>(url: BuildUrl(categoryControllerName, detailActionResultName, new() { [id] = fakeIdValueNotFound }), expected: HttpStatusCode.NotFound);
+        public Task Categories_GetCreate_ControllerActionIdRoute_ReturnsNotFound() => ExecuteTest<string>(url: BuildUrl(categoryControllerName, createActionResultName, new() { [id] = fakeIdValueNotFound }), expected: HttpStatusCode.NotFound);
+
+        [Fact]
+        public Task Categories_PostCreate_ControllerActionIdRoute_ReturnsOk() => ExecuteTest<string>(url: BuildUrl(categoryControllerName, createActionResultName, new() { [id] = fakeIdValue }));
+
+        [Fact]
+        public Task Categories_PostCreate_CnotrollerActionIdRoute_ReturnsNotFound() => ExecuteTest<string>(url: BuildUrl(categoryControllerName, createActionResultName, new() { [id] = fakeIdValueNotFound }), expected: HttpStatusCode.NotFound);
 
         [Fact]
         public Task Categories_GetEdit_ControllerActionIdRoute_ReturnsOk() => ExecuteTest<string>(url: BuildUrl(categoryControllerName, editActionResultName, new() { [id] = fakeIdValue }));
+
+        [Fact]
+        public Task Categories_GetDelete_ControllerActionIdRoute_ReturnsOk() => ExecuteTest<string>(url: BuildUrl(categoryControllerName, deleteActionResultName, new() { [id] = fakeIdValue }));
+
+        [Fact]
+        public Task Categories_GetUndelete_ControllerActionResultIdRoute_ReturnsOk() => ExecuteTest<string>(url: BuildUrl(categoryControllerName, deleteActionResultName, new() { [id] = fakeIdValue }));
     }
 }
