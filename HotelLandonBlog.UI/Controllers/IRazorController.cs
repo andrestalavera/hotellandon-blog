@@ -1,20 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HotelLandonBlog.UI.Controllers
 {
     public interface IRazorController<TEntity>
     {
-        Task<ActionResult<IEnumerable<TEntity>>> Index(string? search);
-        Task<ActionResult<TEntity>> Details(int id);
-        Task<ActionResult<TEntity>> Create();
-        Task<ActionResult<TEntity>> Create(TEntity t);
-        Task<ActionResult<TEntity>> Edit(int id);
-        Task<ActionResult<TEntity>> Edit(int id, TEntity t);
-        Task<ActionResult<TEntity>> Delete(int id);
-        Task<ActionResult<TEntity>> Delete(int id, TEntity t);
-        Task<ActionResult<TEntity>> Undelete(int id);
-        Task<ActionResult<TEntity>> Undelete(int id, TEntity t);
+        Task<IActionResult> Index(string? search);
+        Task<IActionResult> Details(int id);
+        Task<IActionResult> Create();
+        Task<IActionResult> Create(TEntity t);
+        Task<IActionResult> Edit(int id);
+        Task<IActionResult> Edit(int id, TEntity t);
+        Task<IActionResult> Delete(int id);
+        Task<IActionResult> Delete(int id, TEntity t);
+        Task<IActionResult> Undelete(int id);
+        Task<IActionResult> Undelete(int id, TEntity t);
     }
 }
