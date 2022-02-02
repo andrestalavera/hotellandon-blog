@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <UserSecretsId>46e60cbd-aead-422c-80c0-1da9bd3cd3f2</UserSecretsId>
+    <UserSecretsId>HotelLandon-Blog</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

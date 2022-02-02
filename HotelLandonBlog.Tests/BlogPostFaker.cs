@@ -8,7 +8,7 @@ namespace HotelLandonBlog.Tests
     {
         public BlogPostFaker() : base("fr")
         {
-            RuleFor(blogpost => blogpost.Content, y => $"<div>{y.Lorem}</div>");
+            RuleFor(blogpost => blogpost.Content, y => $"<div><p>{y.Lorem}</p></div>");
             RuleForType(typeof(string), f => f.Lorem.Paragraphs(1));
         }
     }

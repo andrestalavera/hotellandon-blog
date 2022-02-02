@@ -9,10 +9,12 @@ namespace HotelLandonBlog.UI.Controllers
         Task<ActionResult<IEnumerable<TEntity>>> Index(string? search);
         Task<ActionResult<TEntity>> Details(int id);
         Task<ActionResult<TEntity>> Create();
-        Task<ActionResult<TEntity>> Create(int id, TEntity t);
+        Task<ActionResult<TEntity>> Create(TEntity t);
         Task<ActionResult<TEntity>> Edit(int id);
         Task<ActionResult<TEntity>> Edit(int id, TEntity t);
         Task<ActionResult<TEntity>> Delete(int id);
+        Task<ActionResult<TEntity>> Delete(int id, TEntity t);
         Task<ActionResult<TEntity>> Undelete(int id);
+        Task<ActionResult<TEntity>> Undelete(int id, TEntity t);
     }
 }
