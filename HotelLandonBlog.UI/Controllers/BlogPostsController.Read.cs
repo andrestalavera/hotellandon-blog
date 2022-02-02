@@ -16,16 +16,25 @@ namespace HotelLandonBlog.UI.Controllers
         public BlogPostsController(IRepository<BlogPost> repository, ILogger<GenericController<IRepository<BlogPost>, BlogPost>> logger) : base(repository, logger)
         {
         }
-        // Get
-        // Get All (search)
+        // Get All (BlogPosts)
+        [HttpGet, Route("/blogposts/")]
+        [HttpGet, Route("/blogposts/home/")]
+        [HttpGet, Route("/blogposts/home/index")]
+
         public Task<ActionResult<IEnumerable<BlogPost>>> Index(string search)
         {
-            throw new NotImplementedException();
+
+
+            return base.Index(search);
         }
+
+        // Get by id
+        [HttpGet, Route("/blogposts/Edit/{id}")]
 
         public Task<ActionResult<BlogPost>> Details(int id)
         {
-            throw new NotImplementedException();
+
+            return base.Details(id);
         }
     }
 }
