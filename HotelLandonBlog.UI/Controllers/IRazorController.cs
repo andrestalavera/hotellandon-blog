@@ -13,6 +13,8 @@ namespace HotelLandonBlog.UI.Controllers
         Task<ActionResult<TEntity>> Edit(int id);
         Task<ActionResult<TEntity>> Edit(int id, TEntity t);
         Task<ActionResult<TEntity>> Delete(int id);
+        Task<ActionResult<TEntity>> Delete(int id, TEntity t);
         Task<ActionResult<TEntity>> Undelete(int id);
+        Task<ActionResult<TEntity>> Undelete(int id, TEntity t);
     }
 }
