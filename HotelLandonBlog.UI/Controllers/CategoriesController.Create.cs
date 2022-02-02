@@ -1,22 +1,23 @@
 ﻿using HotelLandonBlog.Entities;
+using HotelLandonBlog.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
 namespace HotelLandonBlog.UI.Controllers
 {
-    public partial class CategoriesController
+    public partial class CategoriesController : GenericController<IRepository<Category>, BlogPost>, IRazorController<Category>
     {
         // Get
+        [HttpGet]
         public Task<ActionResult<Category>> Create()
         {
-            throw new NotImplementedException();
+            return View(default(Category));
         }
-
         // Post
-        public Task<ActionResult<Category>> Create(Category t)
-        {
-            throw new NotImplementedException();
-        }
+        [HttpPost("[action]/{id}")]
+        public Task<ActionResult<Category>> Create([Bind(new[] {
+            nameof(Category.Name),
+            })] Category entity, int id) => base.Create(entity, id);
     }
 }
