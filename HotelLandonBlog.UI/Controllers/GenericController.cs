@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 
 namespace HotelLandonBlog.UI.Controllers
 {
-    public abstract class GenericController<TRepository, TEntity, IRazorController> : Controller
+    public abstract class GenericController<TRepository, TEntity> : Controller, IRazorController<TEntity>
         where TRepository : IRepository<TEntity>
         where TEntity : EntityBase
-        where IRazorController : IRazorController<TEntity>
+
 
     {
         protected readonly IRepository<TEntity> repository;
 
 
-        protected readonly ILogger<GenericController<TRepository, TEntity, IRazorController>> logger;
+        protected readonly ILogger<GenericController<TRepository, TEntity>> logger;
 
 
         public GenericController(IRepository<TEntity> repository,
-            ILogger<GenericController<TRepository, TEntity, IRazorController>> logger)
+            ILogger<GenericController<TRepository, TEntity>> logger)
         {
             this.repository = repository;
             this.logger = logger;
@@ -31,19 +31,16 @@ namespace HotelLandonBlog.UI.Controllers
 
         public async Task<ActionResult<IEnumerable<TEntity>>> Index(string search)
         {
-            Stopwatch sw = new();
-            sw.Start();
-            IEnumerable<TEntity> items = await repository.GetAllAsync();
-            logger.LogInformation("{ms}ms", sw.ElapsedMilliseconds);
-            return View(items);
-        }
 
-        public async Task<ActionResult<TEntity>> Create(int id)
+            return View(await repository.GetAllAsync());
+        }
+        [HttpGet("[action]")]
+        public async Task<ActionResult<TEntity>> Create()
         {
             return View(default(TEntity));
         }
 
-        [HttpPost]
+        [HttpPost("[action]/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult<TEntity>> Create(int id, TEntity t)
         {
@@ -65,24 +62,31 @@ namespace HotelLandonBlog.UI.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
+        [HttpGet("[action]/{id}")]
         public async Task<ActionResult<TEntity>> Delete(int id)
         {
-            if (id == null)
-            {
-                return View("NotFound");
-            }
-            TEntity entity = await repository.GetAsync(id);
-            if (entity is null)
-            {
-                return View("NotFound");
-            }
-            return View(entity);
+            return View(repository.GetAsync(id));
         }
-
-        public Task<ActionResult<TEntity>> Delete()
+        [HttpPost("[action]/{id}")]
+        public async Task<ActionResult<TEntity>> Delete(int id, TEntity t)
         {
-            throw new System.NotImplementedException();
+            if (id != t.Id)
+            {
+                return View("NotFound");
+            }
+            if (!ModelState.IsValid)
+            {
+                return View(t);
+            }
+            try
+            {
+                await repository.DeleteAsync(id);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet("[action]/{id}")]
@@ -95,7 +99,7 @@ namespace HotelLandonBlog.UI.Controllers
             }
             return View(entity);
         }
-
+        [HttpGet("[action]/{id}")]
         public async Task<ActionResult<TEntity>> Edit(int id)
         {
             if (id == null)
@@ -109,36 +113,51 @@ namespace HotelLandonBlog.UI.Controllers
             }
             return View(entity);
         }
-
+        [HttpPost("[action]/{id}")]
         public async Task<ActionResult<TEntity>> Edit(int id, TEntity t)
         {
             if (id != t.Id)
             {
                 return View("NotFound");
             }
-
             if (!ModelState.IsValid)
             {
                 return View(t);
             }
-
             try
             {
                 await repository.UpdateAsync(id, t);
             }
             catch (DbUpdateConcurrencyException)
             {
-                TEntity tExists = await repository.GetAsync(id);
-
-                if (tExists == null)
-                {
-                    return NotFound();
-                }
-
                 throw;
             }
-
-
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpGet("[action]/{id}")]
+        public async Task<ActionResult<TEntity>> Undelete(int id)
+        {
+            return View(repository.GetAsync(id));
+        }
+        [HttpPost("[action]/{id}")]
+        public async Task<ActionResult<TEntity>> Undelete(int id, TEntity t)
+        {
+            if (id != t.Id)
+            {
+                return View("NotFound");
+            }
+            if (!ModelState.IsValid)
+            {
+                return View(t);
+            }
+            try
+            {
+                await repository.DeleteAsync(id);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
             return RedirectToAction(nameof(Index));
         }
 
