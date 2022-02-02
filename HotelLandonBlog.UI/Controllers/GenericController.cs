@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 
 namespace HotelLandonBlog.UI.Controllers
 {
-    public abstract class GenericController<TRepository, TEntity, IRazorController> : Controller
+    public abstract class GenericController<TRepository, TEntity> : Controller
         where TRepository : IRepository<TEntity>
         where TEntity : EntityBase
-        where IRazorController : IRazorController<TEntity>
+        
 
     {
         protected readonly IRepository<TEntity> repository;
 
 
-        protected readonly ILogger<GenericController<TRepository, TEntity, IRazorController>> logger;
+        protected readonly ILogger<GenericController<TRepository, TEntity>> logger;
 
 
         public GenericController(IRepository<TEntity> repository,
-            ILogger<GenericController<TRepository, TEntity, IRazorController>> logger)
+            ILogger<GenericController<TRepository, TEntity>> logger)
         {
             this.repository = repository;
             this.logger = logger;
@@ -77,6 +77,7 @@ namespace HotelLandonBlog.UI.Controllers
             {
                 return View("NotFound");
             }
+            entity.IsDisable = true;
             return View(entity);
         }
 
@@ -140,6 +141,20 @@ namespace HotelLandonBlog.UI.Controllers
 
 
             return RedirectToAction(nameof(Index));
+        }
+        public async Task<ActionResult<TEntity>> Undelete(int id)
+        {
+            if (id == null)
+            {
+                return View("NotFound");
+            }
+            TEntity entity = await repository.GetAsync(id);
+            if (entity is null)
+            {
+                return View("NotFound");
+            }
+            entity.IsDisable = true;
+            return View(entity);
         }
 
 

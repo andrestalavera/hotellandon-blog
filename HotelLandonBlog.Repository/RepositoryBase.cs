@@ -18,18 +18,18 @@ namespace HotelLandonBlog.Repository
 
         public RepositoryBase(HotelLandonBlogDbContext context) => this._dbContext = context;
 
-        
+
 
         public async Task<TEntity> GetAsync(int id) => await _dbContext.Set<TEntity>().FindAsync(id);
 
         public async Task<TEntity> CreateAsync(TEntity entity)
         {
 
-           entity.Creation = new DateTime();
-           await _dbContext.Set<TEntity>().AddAsync(entity);
-           await _dbContext.SaveChangesAsync();
+            entity.Creation = new DateTime();
+            await _dbContext.Set<TEntity>().AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
 
-           return entity;
+            return entity;
 
         }
 
@@ -58,12 +58,12 @@ namespace HotelLandonBlog.Repository
         {
             var entity = await GetAsync(id);
 
-               if (entity is not null)
+            if (entity is not null)
             {
                 bool v = entity.IsDisable == true;
 
                 await _dbContext.SaveChangesAsync();
-         
+
             }
 
             return entity;
@@ -72,7 +72,7 @@ namespace HotelLandonBlog.Repository
 
         public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicat = null)
         {
-       
+
             return await _dbContext.Set<TEntity>().ToListAsync();
         }
 
@@ -96,3 +96,4 @@ namespace HotelLandonBlog.Repository
 
     }
 }
+

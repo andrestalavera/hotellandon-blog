@@ -1,6 +1,11 @@
-﻿namespace HotelLandonBlog.UI.Controllers
+﻿using HotelLandonBlog.Entities;
+using HotelLandonBlog.Repository;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+
+namespace HotelLandonBlog.UI.Controllers
 {
-    /*public partial class HLController<TRepository, TEntity> : Controller
+    public partial class HLController<TRepository, TEntity> : Controller
 
        where TRepository : IRepository<TEntity>
        where TEntity : EntityBase
@@ -39,7 +44,7 @@
             // Create
             // Update
         }
-    }*/
+    }
 }
 
     

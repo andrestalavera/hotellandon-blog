@@ -2,12 +2,12 @@ using HotelLandonBlog.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
-using static HotelLandonBlog.Data.HotelLandonBlogContext;
+using static HotelLandonBlog.Data.HotelLandonBlogDbContext;
 
 namespace HotelLandonBlog.Data
 {
 
-    public class HotelLandonBlogContext : DbContext, IHotelLandonBlogContext
+    public class HotelLandonBlogDbContext : DbContext, IHotelLandonBlogContext
     {
         public DbSet<BlogPost> Posts { get; set; }
         public DbSet<Category> Categories { get; set; }
