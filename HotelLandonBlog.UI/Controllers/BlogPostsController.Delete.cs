@@ -14,6 +14,7 @@ namespace HotelLandonBlog.UI.Controllers
         }
 
         // Post
+        //post
         public Task<ActionResult<BlogPost>> Delete(int id, BlogPost blogPost)
         {
             throw new NotImplementedException();
