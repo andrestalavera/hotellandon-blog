@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using HotelLandonBlog.Data;
+using HotelLandonBlog.Entities;
+using HotelLandonBlog.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using HotelLandonBlog.Entities;
-using HotelLandonBlog.Data;
-using HotelLandonBlog.Repository;
-using HotelLandonBlog.UI.Controllers;
 
 namespace HotelLandonBlog.UI
 {
