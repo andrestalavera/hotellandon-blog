@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace HotelLandonBlog.UI.Controllers
 {
-    public partial class CategoriesController : GenericController<IRepository<Category>, BlogPost>, IRazorController<Category>
+   /* public partial class CategoriesController : GenericController<IRepository<Category>, BlogPost>, IRazorController<Category>
     {
         // Get
         [HttpGet]
-        public override Task<ActionResult<Category>> Create()
+        public override Task<IActionResult> Create()
         {
             return View(default(Category));
         }
         // Post
         [HttpPost("[action]/{id}")]
-        public override Task<ActionResult<Category>> Create([Bind(new[] {
+        public override Task<IActionResult<Category>> Create([Bind(new[] {
             nameof(Category.Name),
             })] Category entity, int id) => base.Create(entity, id);
-    }
+    }*/
 }

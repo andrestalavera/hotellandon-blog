@@ -7,16 +7,16 @@ namespace HotelLandonBlog.UI.Controllers
 {
     public partial class BlogPostsController
     {
-        // Get
-        public Task<ActionResult<BlogPost>> Edit(int id)
+
+        
+        public override Task<IActionResult> Edit(int id, [Bind ("Id,CategoryId,Title,Content,LastUpdate")]BlogPost t)
         {
-            throw new NotImplementedException();
+            return base.Edit(id, t);
+
         }
 
-        // Post
-        public Task<ActionResult<BlogPost>> Edit(int id, BlogPost t)
-        {
-            throw new NotImplementedException();
-        }
     }
+
+    
+    
 }
