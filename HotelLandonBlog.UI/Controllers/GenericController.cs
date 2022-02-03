@@ -46,7 +46,7 @@ namespace HotelLandonBlog.UI.Controllers
         }
 
         [HttpGet("[action]/{id}")]
-        public virtual async Task<IActionResult> Delete(int id)
+        public virtual async Task<IActionResult> Delete(BlogPost entity, int id)
         {
             return View(repository.GetAsync(id));
         }
