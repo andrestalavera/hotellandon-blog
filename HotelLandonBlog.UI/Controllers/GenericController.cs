@@ -21,18 +21,21 @@ namespace HotelLandonBlog.UI.Controllers
             this.logger = logger;
         }
 
+        [HttpGet]
+        [Route("[controller]/")]
+        [Route("[controller]/[action]")]
         public virtual async Task<IActionResult> Index(string search)
         {
             return View(await repository.GetAllAsync());
         }
 
-        [HttpGet("[action]")]
+        [HttpGet("[controller]/[action]")]
         public virtual async Task<IActionResult> Create()
         {
             return View(new TEntity());
         }
 
-        [HttpPost("[action]/{id}")]
+        [HttpPost("[controller]/[action]")]
         [ValidateAntiForgeryToken]
         public virtual async Task<IActionResult> Create(TEntity t)
         {
@@ -45,13 +48,13 @@ namespace HotelLandonBlog.UI.Controllers
             return await Create();
         }
 
-        [HttpGet("[action]/{id}")]
+        [HttpGet("[controller]/[action]/{id?}")]
         public virtual async Task<IActionResult> Delete(int id)
         {
             return View(repository.GetAsync(id));
         }
 
-        [HttpPost("[action]/{id}")]
+        [HttpPost("[controller]/[action]/{id?}")]
         public virtual async Task<IActionResult> Delete(int id, TEntity t)
         {
             if (id != t.Id)
@@ -73,7 +76,7 @@ namespace HotelLandonBlog.UI.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("[action]/{id}")]
+        [HttpGet("[controller]/[action]/{id?}")]
         public virtual async Task<IActionResult> Details(int id)
         {
             TEntity entity = await repository.GetAsync(id);
@@ -84,7 +87,7 @@ namespace HotelLandonBlog.UI.Controllers
             return View(entity);
         }
 
-        [HttpGet("[action]/{id}")]
+        [HttpGet("[controller]/[action]/{id?}")]
         public virtual async Task<IActionResult> Edit(int id)
         {
             if (id == null)
@@ -99,7 +102,7 @@ namespace HotelLandonBlog.UI.Controllers
             return View(entity);
         }
 
-        [HttpPost("[action]/{id}")]
+        [HttpPost("[controller]/[action]/{id?}")]
         public virtual async Task<IActionResult> Edit(int id, TEntity t)
         {
             if (id != t.Id)
@@ -121,13 +124,13 @@ namespace HotelLandonBlog.UI.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("[action]/{id}")]
+        [HttpGet("[controller]/[action]/{id?}")]
         public virtual async Task<IActionResult> Undelete(int id)
         {
             return View(repository.GetAsync(id));
         }
 
-        [HttpPost("[action]/{id}")]
+        [HttpPost("[controller]/[action]/{id?}")]
         public virtual async Task<IActionResult> Undelete(int id, TEntity t)
         {
             if (id != t.Id)
