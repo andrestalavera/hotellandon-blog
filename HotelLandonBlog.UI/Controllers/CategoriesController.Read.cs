@@ -1,32 +1,35 @@
-﻿
-using HotelLandonBlog.Entities;
+﻿using HotelLandonBlog.Entities;
 using HotelLandonBlog.Repository;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System;
-using System.Diagnostics;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 
-namespace HotelLandonBlog.UI.Controllers   
+namespace HotelLandonBlog.UI.Controllers
 {
     public partial class CategoriesController : GenericController<IRepository<Category>, Category>
     {
         public CategoriesController(IRepository<Category> repository, ILogger<GenericController<IRepository<Category>, Category>> logger) : base(repository, logger)
         {
         }
-        // Get
-        // Get All (search)
+
+        // Get All (Category)
+        [HttpGet, Route("/Category/")]
+        [HttpGet, Route("/Category/home/")]
+       
+
         public Task<ActionResult<IEnumerable<Category>>> Index(string search)
         {
-            throw new NotImplementedException();
+            return base.Index(search);
         }
+
+        // Get by id
+        [HttpGet, Route("/Category/Edit/{id}")]
 
         public Task<ActionResult<Category>> Details(int id)
         {
-            throw new NotImplementedException();
+            return base.Details(id);
         }
     }
 }
