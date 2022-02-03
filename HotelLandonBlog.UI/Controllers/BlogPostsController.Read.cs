@@ -11,21 +11,22 @@ using Microsoft.Extensions.Logging;
 
 namespace HotelLandonBlog.UI.Controllers   
 {
-    /*public partial class BlogPostsController : GenericController<IRepository<BlogPost>, BlogPost>
+    public partial class BlogPostsController : GenericController<IRepository<BlogPost>, BlogPost>
     {
         public BlogPostsController(IRepository<BlogPost> repository, ILogger<GenericController<IRepository<BlogPost>, BlogPost>> logger) : base(repository, logger)
         {
         }
-        // Get
-        // Get All (search)
-        public Task<IActionResult<IEnumerable>, Index(string search)
+        // Get All (Category)
+        [HttpGet, Route("/BlogPosts/")]
+        [HttpGet, Route("/BlogPosts/home/")]
+        public Task<IActionResult> Index(string search)
         {
-            //throw new NotImplementedException();
-        };
-
-    public Task<IActionResult> Details()
-        {
-            throw new NotImplementedException();
+            return base.Index(search);
         }
-   */ 
+
+        public Task<IActionResult> Details(int id)
+        {
+            return base.Details(id);
+        }
+    }
 }

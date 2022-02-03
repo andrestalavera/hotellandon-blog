@@ -8,9 +8,10 @@ namespace HotelLandonBlog.UI.Controllers
 {
     public partial class BlogPostsController : GenericController<IRepository<BlogPost>, BlogPost>, IRazorController<BlogPost>
     {
-        
-       
-            public override Task<IActionResult> Create([Bind(new[] {
+
+        // Post
+        [HttpPost("[action]/{id}")]
+        public override Task<IActionResult> Create([Bind(new[] {
             nameof(BlogPost.Id),
             nameof(BlogPost.CategoryId),
             nameof(BlogPost.Category),
