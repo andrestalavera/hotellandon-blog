@@ -10,13 +10,13 @@ namespace HotelLandonBlog.UI.Controllers
     public partial class BlogPostsController 
     {
         // Get Undelete/Id
-        public Task<ActionResult<BlogPost>> Undelete(int id)
+        public Task<IActionResult> Undelete(int id)
         {
             throw new NotImplementedException();
         }
 
         // Post Undelete/Id
-        public Task<ActionResult<BlogPost>> Undelete(int id, BlogPost blogPost)
+        public Task<IActionResult> Undelete(int id, BlogPost blogPost)
         {
             throw new NotImplementedException();
         }

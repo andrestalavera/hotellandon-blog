@@ -23,7 +23,7 @@ namespace HotelLandonBlog.UI.Controllers
             throw new NotImplementedException();
         }
 
-        public Task<ActionResult<BlogPost>> Details(int id)
+        public Task<IActionResult> Details(int id)
         {
             throw new NotImplementedException();
         }

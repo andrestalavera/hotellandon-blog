@@ -7,16 +7,9 @@ namespace HotelLandonBlog.UI.Controllers
 {
     public partial class CategoriesController
     {
-        // Get
-        public Task<ActionResult<Category>> Delete(int id)
+        public override Task<IActionResult> Delete(int id, [Bind("Id, CategoryId, Title,Content,LastUpdate")] Category t)
         {
-            throw new NotImplementedException();
-        }
-
-        // Post
-        public Task<ActionResult<Category>> Delete(int id, Category blogPost)
-        {
-            throw new NotImplementedException();
+            return base.Delete(id, t);
         }
     }
 }

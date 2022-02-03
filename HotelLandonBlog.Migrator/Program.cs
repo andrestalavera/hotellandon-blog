@@ -19,7 +19,7 @@ namespace HotelLandonBlog.Migrator
 
     public class HotelLandonBlogDbContextFactory : IDesignTimeDbContextFactory<HotelLandonBlogDbContext>
     {
-        public HotelLandonBlogDbContext CreateDbContext(string[] args = null)
+        public HotelLandonBlogDbContext CreateDbContext(string[]? args = null)
         {
             IConfiguration config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", true)

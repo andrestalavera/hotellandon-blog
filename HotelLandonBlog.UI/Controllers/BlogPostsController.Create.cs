@@ -9,7 +9,7 @@ namespace HotelLandonBlog.UI.Controllers
     public partial class BlogPostsController : GenericController<IRepository<BlogPost>, BlogPost>, IRazorController<BlogPost>
     {
         // Get
-        [HttpGet]
+       /* [HttpGet]
         public override Task<ActionResult<BlogPost>> Create()
         {
             return View(default(BlogPost));
@@ -23,7 +23,7 @@ namespace HotelLandonBlog.UI.Controllers
             nameof(BlogPost.Content),
             nameof(BlogPost.LastUpdate),
             nameof(BlogPost.Title),
-            nameof(BlogPost.Status)})] BlogPost entity, int id) => base.Create(entity, id);
+            nameof(BlogPost.Status)})] BlogPost entity, int id) => base.Create(entity, id);*/
     }
 
 }
