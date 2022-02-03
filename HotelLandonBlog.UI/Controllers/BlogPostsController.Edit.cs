@@ -17,28 +17,20 @@ namespace HotelLandonBlog.UI.Controllers
         // Get
         public override async Task<IActionResult<BlogPost>> Edit(int id)
         {
-            throw new NotImplementedException();
+            if (!entity.Id.Equals(id))
+            {
+                return View("NotFound");
+            }
+            if (ModelState.IsValid)
+            {
+                if (await this.repository.UpdateAsync(entity, id))
+                {
+                    return RedirectToAction("Read", "Home");
+                }
+            }
         }
     }
-    // Post
-    //public Task<ActionResult<BlogPost>> Edit(int id, BlogPost t)
-
-    //{
-    //    if (!entity.Id.Equals(id))
-    //    {
-    //        return null; //View("NotFound");
-    //    }
-    //    if (ModelState.IsValid)
-    //    {
-    //        if (await this.repository.UpdateAsync(entity, id))
-    //        {
-    //            return RedirectToAction();
-    //        }
-    //    }
-    //    return View(entity);
-    //    // Create
-    //    // Update
-    //}
+    
 
     [HttpPost("[action]/{id?}")]
     public override async Task<IActionResult> Edit([Bind(new[] {
@@ -47,16 +39,16 @@ namespace HotelLandonBlog.UI.Controllers
             nameof(BlogPost.Category),
             nameof(BlogPost.Title),
             nameof(BlogPost.Content),
-            nameof(BlogPost.LastUpdate),})] BlogPost entity, int id)
-    {
-        if (ModelState.IsValid)
-        {
-            db.Entry(entity).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-        return View(entity);
-    }
-  //  => base.Edit(id, entity);
+            nameof(BlogPost.LastUpdate),})] BlogPost entity, int id)=> base.Edit(id, entity);
+    //{
+    //    //if (ModelState.IsValid)
+    //    //{
+    //    //    db.Entry(entity).State = EntityState.Modified;
+    //    //    db.SaveChanges();
+    //    //    return RedirectToAction("Index");
+    //    //}
+    //    //return View(entity);
+    //}
+  //  
 }
 
