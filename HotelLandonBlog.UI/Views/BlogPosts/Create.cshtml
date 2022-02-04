@@ -1,0 +1,41 @@
+﻿@using HotelLandonBlog.Entities
+@{
+    ViewData["Title"] = "Create";
+}
+@model BlogPost
+
+<form method="post">
+    <div>
+        Titre:
+        <br/>
+        <input asp-for="Title"/>
+    </div>
+    <div>
+        Catégorie:
+        <br/>
+        <input asp-for="Category"/>
+    </div>
+    <div>
+        Contenu:
+        <br/>
+        <input asp-for="Content"/>
+    </div>
+    <div>
+        Statut:
+        <br/>
+        <label for="status-select">Choisir le Statut</label>
+        <select name="statut" id="statut-select">
+            <option value="Draft">Draft</option>
+            <option value="Published">Published</option>
+            <option value="Unpublished">Unpublished</option>
+            <option value="Deleted">Deleted</option>
+        </select>
+        
+    </div>
+    <div>
+        <button type="submit">Créer</button>
+    </div>
+</form>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
