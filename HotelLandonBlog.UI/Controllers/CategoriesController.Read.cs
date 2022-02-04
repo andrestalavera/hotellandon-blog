@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace HotelLandonBlog.UI.Controllers   
 {
-    public partial class CategoriesController : GenericController<IRepository<Category>, Category>
+   /* public partial class CategoriesController : GenericController<IRepository<Category>, Category>
     {
         public CategoriesController(IRepository<Category> repository, ILogger<GenericController<IRepository<Category>, Category>> logger) : base(repository, logger)
         {
@@ -28,5 +28,5 @@ namespace HotelLandonBlog.UI.Controllers
         {
             return base.Details(id);
         }
-    }
+    }*/
 }
