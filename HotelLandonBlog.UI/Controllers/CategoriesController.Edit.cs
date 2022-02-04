@@ -9,11 +9,11 @@ namespace HotelLandonBlog.UI.Controllers
     {
 
 
-        /*public override Task<IActionResult> Edit(int id, [Bind("Id,CategoryId,Title,Content,LastUpdate")] BlogPost t)
+        public override Task<IActionResult> Edit(int id, [Bind("Id,Name,CategoryId,Title,Content,LastUpdate")] Category t)
         {
             return base.Edit(id, t);
 
-        }*/
+        }
 
     }
 
