@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HotelLandonBlog.UI.Controllers
 {
-    public partial class CategoriesController : Controller, IRazorController<Category>
+    public partial class CategoriesController 
     {
         // Get Undelete/Id
         public Task<ActionResult<Category>> Undelete(int id)

@@ -1,0 +1,19 @@
+﻿@using HotelLandonBlog.Entities
+@{
+    ViewData["Title"] = "Create";
+}
+@model Category
+
+<form method="post">
+    <div>
+        Nom:
+        <br/>
+        <input asp-for="Name"/>
+    </div>
+    <div>
+        <button type="submit">Créer</button>
+    </div>
+</form>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

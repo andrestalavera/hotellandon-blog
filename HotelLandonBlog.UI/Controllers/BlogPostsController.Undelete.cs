@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HotelLandonBlog.UI.Controllers
 {
-    public partial class BlogPostsController : Controller, IRazorController<BlogPost>
+    public partial class BlogPostsController 
     {
         // Get Undelete/Id
         public Task<ActionResult<BlogPost>> Undelete(int id)

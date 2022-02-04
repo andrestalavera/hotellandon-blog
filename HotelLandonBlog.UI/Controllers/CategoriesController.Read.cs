@@ -1,5 +1,4 @@
-﻿
-using HotelLandonBlog.Entities;
+﻿using HotelLandonBlog.Entities;
 using HotelLandonBlog.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -12,18 +11,22 @@ using Microsoft.Extensions.Logging;
 
 namespace HotelLandonBlog.UI.Controllers   
 {
-    public partial class CategoriesController : Controller, IRazorController<Category>
+    public partial class CategoriesController : GenericController<IRepository<Category>, Category>
     {
-        // Get
-        // Get All (search)
-        public Task<ActionResult<IEnumerable<Category>>> Index(string search)
+        public CategoriesController(IRepository<Category> repository, ILogger<GenericController<IRepository<Category>, Category>> logger) : base(repository, logger)
         {
-            throw new NotImplementedException();
+        }
+        // Get All (Category)
+        [HttpGet, Route("/Category/")]
+        [HttpGet, Route("/Category/home/")]
+        public Task<IActionResult> Index(string search)
+        {
+            return base.Index(search);
         }
 
-        public Task<ActionResult<Category>> Details(int id)
+        public Task<IActionResult> Details(int id)
         {
-            throw new NotImplementedException();
+            return base.Details(id);
         }
     }
 }

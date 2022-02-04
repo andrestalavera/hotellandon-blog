@@ -1,22 +1,24 @@
 ﻿using HotelLandonBlog.Entities;
+using HotelLandonBlog.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
 namespace HotelLandonBlog.UI.Controllers
 {
-    public partial class BlogPostsController
+    public partial class BlogPostsController : GenericController<IRepository<BlogPost>, BlogPost>, IRazorController<BlogPost>
     {
-        // Get
-        public Task<ActionResult<BlogPost>> Create()
-        {
-            throw new NotImplementedException();
-        }
 
         // Post
-        public Task<ActionResult<BlogPost>> Create(BlogPost t)
-        {
-            throw new NotImplementedException();
-        }
+        [HttpPost("[action]/{id}")]
+        public override Task<IActionResult> Create([Bind(new[] {
+            nameof(BlogPost.Id),
+            nameof(BlogPost.CategoryId),
+            nameof(BlogPost.Category),
+            nameof(BlogPost.Content),
+            nameof(BlogPost.LastUpdate),
+            nameof(BlogPost.Title),
+            nameof(BlogPost.Status)})] BlogPost entity) => base.Create(entity);
     }
+
 }

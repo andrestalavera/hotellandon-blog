@@ -12,20 +12,22 @@ namespace HotelLandonBlog.Tests.UnitTests
 
         private readonly CategoriesFaker categoriesFaker;
 
+        [Theory]
         [InlineData("a")]
         [InlineData("b")]
         [InlineData("ab")]
         [InlineData("abc")]
-        public void Category_Name_MinLenght_RegexMatch_Success(string categoryName)
+        public void Category_Name_MinLenght_RegexMatch_Fails(string categoryName)
         {
             // Arrange
             Category category = categoriesFaker.Generate();
+            category.Name = categoryName;
 
             // Act
             Match match = Regex.Match(category.Name, categoryNamePattern);
 
             // Assert
-            Assert.True(match.Success);
+            Assert.True(!match.Success);
         }
 
         [InlineData("Abc")]
